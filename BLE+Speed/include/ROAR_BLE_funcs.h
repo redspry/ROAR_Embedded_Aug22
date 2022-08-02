@@ -102,36 +102,36 @@ class VelocityCharCallback: public BLECharacteristicCallbacks {
     }
 };
 
-// class ThrottleCharCallback: public BLECharacteristicCallbacks {
-//     void onRead(BLECharacteristic *pCharacteristic){
-//       float my_throttle_reading = (float)(throttle_output);
-//       pCharacteristic->setValue(my_throttle_reading);
-//       Serial.println("Sent throttle reading");
-//       Serial.println(my_throttle_reading);
-//     }
-// };
-
-class VelocityAndThrottleCharCallback: public BLECharacteristicCallbacks {
+class ThrottleCharCallback: public BLECharacteristicCallbacks {
     void onRead(BLECharacteristic *pCharacteristic){
-      long long velocityThrottleOut = pack((float)speed_mps, (float)throttle_output);
-      /*WARNING Header file changed to support long long type in BLECharacteristic.cpp and .h
-      Add the code below at line 708 of BLECharacteristic.cpp
-      ==========================================================
-      void BLECharacteristic::setValue(long long& data64) {
-	    long long temp = data64;
-	    setValue((uint8_t*)&temp, 8);
-      } // setValue
-      ==========================================================
-      Add this line to BLECharacteristic.h after line 79:
-      ==========================================================
-      void setValue(long long& data64); 
-      ==========================================================
-      */
-      pCharacteristic->setValue(velocityThrottleOut); 
-      // Serial.println("Sent throttle reading");
-      // Serial.println(velocityThrottleOut);
+      float my_throttle_reading = (float)(throttle_output);
+      pCharacteristic->setValue(my_throttle_reading);
+      Serial.println("Sent throttle reading");
+      Serial.println(my_throttle_reading);
     }
 };
+
+// class VelocityAndThrottleCharCallback: public BLECharacteristicCallbacks {
+//     void onRead(BLECharacteristic *pCharacteristic){
+//       long long velocityThrottleOut = pack((float)speed_mps, (float)throttle_output);
+//       /*WARNING Header file changed to support long long type in BLECharacteristic.cpp and .h
+//       Add the code below at line 708 of BLECharacteristic.cpp
+//       ==========================================================
+//       void BLECharacteristic::setValue(long long& data64) {
+// 	    long long temp = data64;
+// 	    setValue((uint8_t*)&temp, 8);
+//       } // setValue
+//       ==========================================================
+//       Add this line to BLECharacteristic.h after line 79:
+//       ==========================================================
+//       void setValue(long long& data64); 
+//       ==========================================================
+//       */
+//       pCharacteristic->setValue(velocityThrottleOut); 
+//       // Serial.println("Sent throttle reading");
+//       // Serial.println(velocityThrottleOut);
+//     }
+// };
 
 class nameChangeCallbacks: public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic *nameChangeCharacteristic) {
@@ -227,10 +227,11 @@ void setupBLE() {
                                             BLECharacteristic::PROPERTY_READ);
     vCharacteristic->setCallbacks(new VelocityCharCallback());
 
-    BLECharacteristic *throtAndVelocityReturnCharacteristic = pService->createCharacteristic(
-                                            THROTVELOCITY_RETURN_UUID,
+    // changed to return just throttle versus throtAndVelocityReturnCharacteristic
+    BLECharacteristic *tCharacteristic = pService->createCharacteristic(
+                                            THROTTLE_RETURN_UUID,
                                             BLECharacteristic::PROPERTY_READ);
-    throtAndVelocityReturnCharacteristic->setCallbacks(new VelocityAndThrottleCharCallback());
+    tCharacteristic->setCallbacks(new ThrottleCharCallback());
     
     pService->start();
 
