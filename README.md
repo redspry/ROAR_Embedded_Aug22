@@ -151,7 +151,7 @@ download the codebase and any prompted dependencies, and choose a python agent t
 
 - **[ROAR_Embedded_Sum22](https://github.com/redspry/ROAR_Embedded_Sum22)** (forked) recommended check UUID compatibility with app. Current boards are flashed from this Repo.
 
-  The backplane (4x3 female connectors) of the custom ESP32 board plugs into the Traxxas 6519 TQ 2.4 GHz Micro Receiver (3CH), main motor as well as the servo for turning both plug into and are controlled by the ESP32 board which used BLE to communicate with the iOS app. 
+  The backplane (4x3 female connectors) of the custom ESP32 board plugs into the Traxxas 6519 TQ 2.4 GHz Micro Receiver (3CH), the main motor as well as the servo for turning both plug into and are controlled by the ESP32 board which used BLE to communicate with the iOS app. 
 
   **![img](https://lh3.googleusercontent.com/kbovEJ9-SiMCQkNXlgYFODlLYw6I7oBi0RoBwvtbPxhU78a1kLZAW7s_2waaaPin82Lzy1gGLVYltQNKvLVcarmCaERUiTuys6_5_BXRrJ82bolkO0geeygkiSAiM3CB4C2m-ToUfOf-0yAUsYXnYO8)**
 
