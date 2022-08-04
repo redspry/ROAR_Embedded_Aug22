@@ -96,6 +96,12 @@ Post upload you should see **SUCCESS**
 
 
 
+------
+
+
+
+
+
 # ROAR (Robotic Open Autonomous Racing) Project Overview
 
 The ROAR Project uses Traxxas RC Cars, in conjunction with this Board and an iPhone iOS application.
